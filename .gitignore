@@ -159,3 +159,4 @@ data/*
 tab2notes/*
 tab2notes/
 .flaskenv
+config.py
