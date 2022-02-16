@@ -158,3 +158,4 @@ results/*
 data/*
 tab2notes/*
 tab2notes/
+.flaskenv
