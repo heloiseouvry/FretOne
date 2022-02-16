@@ -6,7 +6,8 @@
     <p>
         <ul>
             {% for upload in uploads %}
-            <li>{% if os.path.isfile('./app/uploads/'+upload.filename) %}(I){% endif %} {{ upload.filename }}</li>
+            <li>{% if os.path.isfile('./app/static/uploads/'+upload.filename) %}(I){% endif %} {{ upload.filename }}</li>
+            <li>{% if os.path.isfile('./app/static/uploads/'+upload.filename) %} <img src="./static/uploads/{{ upload.filename }}" height="100px"/> {% endif %}</li>
             {% endfor %}
         </ul>
     </p>

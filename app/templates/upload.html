@@ -5,8 +5,12 @@
     <form method="POST" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <p>
-            {{ form.sheet }}<br>
+            {{ form.fileloader }}<br>
         </p>
-        <input type="submit">
+        <input type="submit" value="Traduire">
+        <p>{{ form.fileloader.data.filename }}</p>
+        <p>
+            {% if os.path.isfile('./app/static/translated/'+form.fileloader.data.filename.split(".")[0]+'_translated.jpg') %} <img src="./static/translated/{{ form.fileloader.data.filename.split('.')[0] }}_translated.jpg" height="500px"/> {% endif %}
+        </p>
     </form>
 {% endblock %}
