@@ -5,7 +5,7 @@ from app import app
 from app import db
 from app.forms import SheetForm
 from app.models import Upload
-
+from tab2notes.src.f1 import translate
 
 @app.route('/')
 @app.route('/index')
@@ -24,6 +24,7 @@ def upload():
         f_db = Upload(filename=filename)
         db.session.add(f_db)
         db.session.commit()
+        translate(os.path.join(app.root_path, 'static/uploads', filename), os.path.join(app.root_path, 'static/translated/'))
         # return redirect(url_for('upload_db'))
         return render_template('upload.html', form=form, os=os)
 
