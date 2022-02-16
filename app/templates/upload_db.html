@@ -6,7 +6,7 @@
     <p>
         <ul>
             {% for upload in uploads %}
-            <li>{{ upload }}</li>
+            <li>{% if os.path.isfile('./app/uploads/'+upload.filename) %}(I){% endif %} {{ upload.filename }}</li>
             {% endfor %}
         </ul>
     </p>

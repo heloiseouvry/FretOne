@@ -31,4 +31,4 @@ def upload():
 @app.route('/upload_db')
 def upload_db():
     uploads = Upload.query.all()
-    return render_template('upload_db.html', uploads=uploads)
+    return render_template('upload_db.html', uploads=uploads, os=os)
