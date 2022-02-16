@@ -156,5 +156,7 @@ cython_debug/
 JupyterNotebooks/*
 results/*
 data/*
-tab2notes/*
 tab2notes/
+.flaskenv
+config.py
+app/uploads/*
