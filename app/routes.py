@@ -1,8 +1,11 @@
 from flask import render_template, redirect, url_for
-from app import app
-from app.forms import SheetForm
 from werkzeug.utils import secure_filename
 import os
+from app import app
+from app import db
+from app.forms import SheetForm
+from app.models import Upload
+
 
 @app.route('/')
 @app.route('/index')
@@ -18,6 +21,14 @@ def upload():
         f.save(os.path.join(
             app.root_path, 'uploads', filename
         ))
-        return render_template('upload.html', form=form, uploaded=os.path.join('uploads', filename))
+        f_db = Upload(filename=filename)
+        db.session.add(f_db)
+        db.session.commit()
+        return redirect(url_for('upload_db'))
 
     return render_template('upload.html', form=form)
+
+@app.route('/upload_db')
+def upload_db():
+    uploads = Upload.query.all()
+    return render_template('upload_db.html', uploads=uploads)

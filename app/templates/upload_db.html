@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>DB uploads</h1>
+    {% if uploads %}        
+    <p>
+        <ul>
+            {% for upload in uploads %}
+            <li>{{ upload }}</li>
+            {% endfor %}
+        </ul>
+    </p>
+    {% endif %}
+{% endblock %}
