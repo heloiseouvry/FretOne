@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Upload sheet</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.sheet }}<br>
+        </p>
+        {% if uploaded %}
+        <p>
+            {{ uploaded }}<br>
+        </p>
+        <img src={{ uploaded }}>
+        {% endif %}
+        <input type="submit">
+    </form>
+{% endblock %}
