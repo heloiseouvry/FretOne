@@ -6,6 +6,7 @@ Flask-Migrate==3.1.0
 Flask-SQLAlchemy==2.5.1
 Flask-WTF==1.0.0
 greenlet==1.1.2
+gunicorn==20.1.0
 itsdangerous==2.0.1
 Jinja2==3.0.3
 Mako==1.1.6
@@ -14,6 +15,7 @@ numpy==1.22.0
 opencv-python==4.5.5.62
 pdf2image==1.16.0
 Pillow==9.0.0
+psycopg2-binary==2.9.3
 python-dotenv==0.19.2
 SQLAlchemy==1.4.31
 Werkzeug==2.0.3
