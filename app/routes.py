@@ -5,7 +5,7 @@ from app import app
 from app import db
 from app.forms import SheetForm
 from app.models import Upload
-
+from tab2notes.src.f1 import translate
 
 @app.route('/')
 @app.route('/index')
@@ -16,17 +16,19 @@ def index():
 def upload():
     form = SheetForm()
     if form.validate_on_submit():
-        f = form.sheet.data
+        f = form.fileloader.data
         filename = secure_filename(f.filename)
         f.save(os.path.join(
-            app.root_path, 'uploads', filename
+            app.root_path, 'static/uploads', filename
         ))
         f_db = Upload(filename=filename)
         db.session.add(f_db)
         db.session.commit()
-        return redirect(url_for('upload_db'))
+        translate(os.path.join(app.root_path, 'static/uploads', filename), os.path.join(app.root_path, 'static/translated/'))
+        # return redirect(url_for('upload_db'))
+        return render_template('upload.html', form=form, os=os)
 
-    return render_template('upload.html', form=form)
+    return render_template('upload.html', form=form, os=os)
 
 @app.route('/upload_db')
 def upload_db():

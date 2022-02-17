@@ -3,4 +3,4 @@ from flask_wtf.file import FileField, FileRequired
 from app import app
 
 class SheetForm(FlaskForm):
-    sheet = FileField(validators=[FileRequired()])
+    fileloader = FileField(validators=[FileRequired()])
