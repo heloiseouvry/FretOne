@@ -19,15 +19,15 @@ def upload():
     if form.validate_on_submit():
         f = form.fileloader.data
         filename = secure_filename(f.filename)
-        Path("/uploads").mkdir(parents=True, exist_ok=True)
-        Path("/translated").mkdir(parents=True, exist_ok=True)
+        Path("/tmp/uploads").mkdir(parents=True, exist_ok=True)
+        Path("/tmp/translated").mkdir(parents=True, exist_ok=True)
         f.save(os.path.join(
-            app.root_path, '/uploads', filename
+            app.root_path, 'tmp/uploads', filename
         ))
         f_db = Upload(filename=filename)
         db.session.add(f_db)
         db.session.commit()
-        translate(os.path.join(app.root_path, '/uploads', filename), os.path.join(app.root_path, '/translated/'))
+        translate(os.path.join(app.root_path, 'tmp/uploads', filename), os.path.join(app.root_path, 'tmp/translated/'))
         # return redirect(url_for('upload_db'))
         return render_template('upload.html', form=form, os=os)
 
