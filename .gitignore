@@ -158,7 +158,9 @@ results/*
 data/*
 tab2notes/
 .flaskenv
-config.py
+# config.py
 app/uploads/*
 app/static/translated/*
 app/static/uploads/*
+
+app.db
