@@ -1,5 +1,6 @@
 from flask import render_template, redirect, url_for
 from werkzeug.utils import secure_filename
+from pathlib import Path
 import os
 from app import app
 from app import db
@@ -18,6 +19,8 @@ def upload():
     if form.validate_on_submit():
         f = form.fileloader.data
         filename = secure_filename(f.filename)
+        Path("/static/uploads").mkdir(parents=True, exist_ok=True)
+        Path("/static/translated").mkdir(parents=True, exist_ok=True)
         f.save(os.path.join(
             app.root_path, 'static/uploads', filename
         ))
