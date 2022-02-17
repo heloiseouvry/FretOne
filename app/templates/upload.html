@@ -9,7 +9,7 @@
         </p>
         <input type="submit" value="Traduire">
         {% if form.fileloader.data %}        
-            {% if os.path.isfile('./app/static/translated/'+form.fileloader.data.filename.split(".")[0]+'_translated.jpg') %}
+            {% if os.path.isfile('./tmp/'+form.fileloader.data.filename.split(".")[0]+'_translated.jpg') %}
                 <p><img src="./tmp/{{ form.fileloader.data.filename.split('.')[0] }}_translated.jpg" height="500px"/></p>
             {% else %}
                 <p>La traduction de "{{ form.fileloader.data.filename }}" n'a pas fonctionné... :(</p>
