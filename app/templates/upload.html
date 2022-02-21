@@ -9,11 +9,17 @@
         </p>
         <input type="submit" value="Traduire">
         {% if form.fileloader.data %}        
-            {% if os.path.isfile('./tmp/'+form.fileloader.data.filename.split(".")[0]+'_translated.jpg') %}
-                <p><img src="./tmp/{{ form.fileloader.data.filename.split('.')[0] }}_translated.jpg" height="500px"/></p>
+            {% if S3_BUCKET %}
+                <p><img src="https://{{S3_BUCKET}}.s3.eu-west-3.amazonaws.com/{{form.fileloader.data.filename}}" height="500px"/></p>
+                <p><img src="https://{{S3_BUCKET}}.s3.eu-west-3.amazonaws.com/{{form.fileloader.data.filename.split('.')[0] }}_translated.jpg" height="500px"/></p>
             {% else %}
-                <p>La traduction de "{{ form.fileloader.data.filename }}" n'a pas fonctionné... :(</p>
+                {% if os.path.isfile('./tmp/'+form.fileloader.data.filename.split(".")[0]+'_translated.jpg') %}
+                    <p><img src="./tmp/{{ form.fileloader.data.filename.split('.')[0] }}_translated.jpg" height="500px"/></p>
+                {% else %}
+                    <p>La traduction de "{{ form.fileloader.data.filename }}" n'a pas fonctionné... :(</p>
+                {% endif %}
             {% endif %}
+
         {% endif %}
     </form>
 {% endblock %}
