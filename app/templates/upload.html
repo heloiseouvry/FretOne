@@ -4,9 +4,9 @@
     <h2>Upload sheet</h2>
     <form method="POST" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
-        <div class="form_container">
+        <div class="container form_container">
             {{ form.fileloader }}
-            <input class="translate" type="submit" value="Traduire">
+            <input class="translate" type="submit" value="Translate">
         </div>
         {% if form.fileloader.data %}        
             {% if S3_BUCKET %}
