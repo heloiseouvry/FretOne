@@ -4,14 +4,26 @@
     <h2>Upload sheet</h2>
     <form method="POST" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
-        <p>
-            {{ form.fileloader }}<br>
-        </p>
-        <input type="submit" value="Traduire">
+        <div class="form_container">
+            {{ form.fileloader }}
+            <input class="translate" type="submit" value="Traduire">
+        </div>
         {% if form.fileloader.data %}        
             {% if S3_BUCKET %}
-                <p><img src="https://{{S3_BUCKET}}.s3.eu-west-3.amazonaws.com/{{form.fileloader.data.filename}}" height="500px"/></p>
-                <p><img src="https://{{S3_BUCKET}}.s3.eu-west-3.amazonaws.com/{{form.fileloader.data.filename.split('.')[0] }}_translated.jpg" height="500px"/></p>
+                <div class="file_container">
+                    <div>
+                        <h3>Original</h3>
+                        <img class="file" alt="Original image" src="https://{{S3_BUCKET}}.s3.eu-west-3.amazonaws.com/{{form.fileloader.data.filename}}"/>
+                    </div>
+                    <div>----></div>
+                    <div>
+                        <h3>Translated</h3>
+                        <p>(click on image to download)</p>
+                        <a download="{{form.fileloader.data.filename.split('.')[0] }}_translated.jpg" href="https://{{S3_BUCKET}}.s3.eu-west-3.amazonaws.com/{{form.fileloader.data.filename.split('.')[0] }}_translated.jpg" title="Translated image">
+                            <img class="file" alt="Translated image" src="https://{{S3_BUCKET}}.s3.eu-west-3.amazonaws.com/{{form.fileloader.data.filename.split('.')[0] }}_translated.jpg"/>
+                        </a>
+                    </div>
+                </div>
             {% else %}
                 {% if os.path.isfile('./tmp/'+form.fileloader.data.filename.split(".")[0]+'_translated.jpg') %}
                     <p><img src="./tmp/{{ form.fileloader.data.filename.split('.')[0] }}_translated.jpg" height="500px"/></p>
