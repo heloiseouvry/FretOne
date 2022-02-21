@@ -44,7 +44,8 @@ def upload():
         print(f"Translated file: {translated_file} | type: {type(translated_file)}")
 
         try:
-            s3.upload_file(translated_file, S3_BUCKET, translated_filename)
+            s3.Object(S3_BUCKET, translated_filename).put(Body=translated_file,ContentType='image/JPG')
+            # s3.upload_file(os.path.join('/tmp', translated_filename), S3_BUCKET, translated_filename)
         except ClientError as e:
             logging.error(e)
 
