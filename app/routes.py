@@ -1,6 +1,5 @@
 from flask import render_template, redirect, url_for
 from werkzeug.utils import secure_filename
-from pathlib import Path
 import os
 from app import app
 from app import db
@@ -24,7 +23,6 @@ def upload():
         f = form.fileloader.data
         filename = secure_filename(f.filename)
         f.save(os.path.join('/tmp', filename))
-
 
         if app.config:
             S3_BUCKET = app.config['S3_BUCKET_NAME']

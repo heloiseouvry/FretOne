@@ -1,8 +1,11 @@
 from flask import Flask
 from whitenoise import WhiteNoise
-from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+try:
+    from config import Config
+except ModuleNotFoundError as err:
+    print(err)
 
 app = Flask(__name__, static_url_path='/static')
 app.config.from_object(Config)
