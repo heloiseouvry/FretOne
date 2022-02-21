@@ -19,10 +19,12 @@ def index():
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     form = SheetForm()
+    print(f'app.config : {app.config}')
     if form.validate_on_submit():
         f = form.fileloader.data
         filename = secure_filename(f.filename)
         f.save(os.path.join('/tmp', filename))
+
 
         if app.config:
             S3_BUCKET = app.config['S3_BUCKET_NAME']
