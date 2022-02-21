@@ -14,6 +14,10 @@ a {
     text-decoration: none;
 }
 
+.italic {
+    font-style: italic;
+}
+
 header {
     border-bottom: 2px rgb(240, 144, 0) solid;
     padding: 10px;
@@ -63,10 +67,30 @@ h3 {
     font-style: italic;
 }
 
-.form_container {
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.how_to_container {
+    width: fit-content;
+    padding: 30px;
+    background-color: bisque;
+}
+
+.how_to_container h3 {
+    padding-bottom: 10px;
+    border-bottom: 1px black solid;
+}
+
+.how_to_container ul {
+    padding: 10px;
+    list-style-type: disc;
+}
+
+.how_to_container li {
+    padding-top: 10px;
 }
 
 .form_container input {
