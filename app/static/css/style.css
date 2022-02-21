@@ -42,6 +42,10 @@ footer {
     text-align: center;
 }
 
+#main-title a {
+    color: black;
+}
+
 nav a {
     padding-left: 20px;
 }
