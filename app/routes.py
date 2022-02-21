@@ -18,7 +18,6 @@ def index():
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     form = SheetForm()
-    print(f'app.config : {app.config}')
     if form.validate_on_submit():
         f = form.fileloader.data
         filename = secure_filename(f.filename)
@@ -41,7 +40,8 @@ def upload():
             db.session.add(f_db)
             db.session.commit()
 
-        translated_filename = translate(os.path.join('/tmp', filename), os.path.join('/tmp/'))
+        [translated_file, translated_filename] = translate(os.path.join('/tmp', filename), os.path.join('/tmp/'))
+        print(f"Translated file: {translated_file} | type: {type(translated_file)}")
 
         try:
             s3.upload_file(os.path.join('/tmp', translated_filename), S3_BUCKET, translated_filename)
