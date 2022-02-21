@@ -8,7 +8,8 @@ except ModuleNotFoundError as err:
     print(err)
 
 app = Flask(__name__, static_url_path='/static')
-app.config.from_object(Config)
+if app.config:
+    app.config.from_object(Config)
 app.wsgi_app = WhiteNoise(app.wsgi_app, root="static/")
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
