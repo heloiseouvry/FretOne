@@ -9,11 +9,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
 </head>
 <body>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/upload">Upload</a>
-        <a href="/upload_db">DB</a>
-    </nav>
-    {% block content %}{% endblock %}
+    <header>
+        <h1 id="main-title"><a href="/">FretOne</a></h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/upload">Upload</a>
+            <a href="/upload_db">DB</a>
+        </nav>
+    </header>
+    <main>{% block content %}{% endblock %}</main>
+    <footer>
+        <p>&copy; 2022 - <a href="https://github.com/heloiseouvry">Heloise Ouvry</a></p>
+    </footer>
 </body>
 </html>
