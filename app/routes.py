@@ -40,11 +40,11 @@ def upload():
             db.session.add(f_db)
             db.session.commit()
 
-        [translated_file, translated_filename] = translate(os.path.join('/tmp', filename), os.path.join('/tmp'))
+        [translated_file, translated_filename] = translate(os.path.join('/tmp', filename), os.path.join('/tmp/'))
         print(f"Translated file type: {type(translated_file)}")
 
         try:
-            s3.upload_fileobj(translated_file, S3_BUCKET, translated_filename)
+            # s3.upload_fileobj(translated_file, S3_BUCKET, translated_filename)
             s3.upload_file(os.path.join('/tmp', translated_filename), S3_BUCKET, translated_filename)
         except ClientError as e:
             logging.error(e)
