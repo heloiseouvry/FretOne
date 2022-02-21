@@ -41,7 +41,7 @@ def upload():
             db.session.commit()
 
         [translated_file, translated_filename] = translate(os.path.join('/tmp', filename), os.path.join('/tmp'))
-        print(f"Translated file: {translated_file} | type: {type(translated_file)}")
+        print(f"Translated file type: {type(translated_file)}")
 
         try:
             s3.Object(S3_BUCKET, translated_filename).put(Body=translated_file,ContentType='image/JPG')
