@@ -21,7 +21,7 @@ def upload():
     if form.validate_on_submit():
         f = form.fileloader.data
         filename = secure_filename(f.filename)
-        f.save(os.path.join('/tmp', filename))
+        f.save(os.path.join(os.path.sep, 'tmp', filename))
 
         s3 = boto3.client(
             "s3",
@@ -31,7 +31,7 @@ def upload():
         S3_BUCKET = app.config['S3_BUCKET_NAME']
 
         try:
-            s3.upload_file(os.path.join('/tmp', filename), S3_BUCKET, filename)
+            s3.upload_file(os.path.join(os.path.sep, 'tmp', filename), S3_BUCKET, filename)
         except ClientError as e:
             logging.error(e)
 
@@ -40,7 +40,7 @@ def upload():
             db.session.add(f_db)
             db.session.commit()
 
-        translated_filename = translate(os.path.join('/tmp', filename), os.path.join('/tmp/'))
+        translated_file = translate(os.path.join(os.path.sep, 'tmp', filename), os.path.join(os.path.sep, 'tmp', os.path.sep))
 
         try:
             s3.upload_file(os.path.join('/tmp', translated_filename), S3_BUCKET, translated_filename)
