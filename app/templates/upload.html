@@ -13,7 +13,11 @@
                 <div class="file_container">
                     <div>
                         <h3>Original</h3>
-                        <img class="file" alt="Original image" src="https://{{S3_BUCKET}}.s3.eu-west-3.amazonaws.com/{{form.fileloader.data.filename}}"/>
+                        {% if form.fileloader.data.filename.split('.')[-1] =='pdf' %}
+                            <img class="file" alt="Original image" src="https://{{S3_BUCKET}}.s3.eu-west-3.amazonaws.com/{{form.fileloader.data.filename.split('.')[0]}}.jpg"/>
+                        {% else %}
+                            <img class="file" alt="Original image" src="https://{{S3_BUCKET}}.s3.eu-west-3.amazonaws.com/{{form.fileloader.data.filename}}"/>
+                        {% endif %}
                     </div>
                     <div>----></div>
                     <div>
