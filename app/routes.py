@@ -43,7 +43,8 @@ def upload():
         translated_file = translate(os.path.join(os.path.sep, 'tmp', filename), os.path.join(os.path.sep, 'tmp', os.path.sep))
 
         try:
-            s3.upload_file(os.path.join('/tmp', translated_filename), S3_BUCKET, translated_filename)
+            for translated_filename in translated_file:
+                s3.upload_file(os.path.join('/tmp', translated_filename), S3_BUCKET, translated_filename)
         except ClientError as e:
             logging.error(e)
 
