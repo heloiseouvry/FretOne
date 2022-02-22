@@ -20,12 +20,20 @@
                         {% endif %}
                     </div>
                     <div>----></div>
-                    <div>
+                    <div class="translated_img_container">
                         <h3>Translated</h3>
-                        <p>(click on image to download)</p>
-                        <a download="{{form.fileloader.data.filename.split('.')[0] }}_translated.jpg" href="https://{{S3_BUCKET}}.s3.eu-west-3.amazonaws.com/{{form.fileloader.data.filename.split('.')[0] }}_translated.jpg" title="Translated image">
-                            <img class="file" alt="Translated image" src="https://{{S3_BUCKET}}.s3.eu-west-3.amazonaws.com/{{form.fileloader.data.filename.split('.')[0] }}_translated.jpg"/>
-                        </a>
+                        <p>(click on image/link to download)</p>
+                        <ul>
+                            {% for translated_file in translation %}
+                                <a download="{{translated_file}}" href="https://{{S3_BUCKET}}.s3.eu-west-3.amazonaws.com/{{translated_file }}" title="Translated image">
+                                {% if translation|length == 1 %}
+                                    <img class="file" alt="Translated image" src="https://{{S3_BUCKET}}.s3.eu-west-3.amazonaws.com/{{translated_file }}"/>
+                                {% else %}
+                                    <li>{{ translated_file }}</li>
+                                {% endif %}
+                                </a>
+                                {% endfor %}
+                        </ul>
                     </div>
                 </div>
             {% else %}

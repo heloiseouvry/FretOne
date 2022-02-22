@@ -40,17 +40,17 @@ def upload():
             db.session.add(f_db)
             db.session.commit()
 
-        translated_file = translate(os.path.join(os.path.sep, 'tmp', filename), os.path.join(os.path.sep, 'tmp', os.path.sep))
+        translation = translate(os.path.join(os.path.sep, 'tmp', filename), os.path.join(os.path.sep, 'tmp', os.path.sep))
 
         try:
-            for translated_filename in translated_file:
+            for translated_filename in translation:
                 s3.upload_file(os.path.join(os.path.sep, 'tmp', translated_filename), S3_BUCKET, translated_filename)
         except ClientError as e:
             logging.error(e)
 
-        return render_template('upload.html', form=form, os=os, S3_BUCKET=S3_BUCKET)
+        return render_template('upload.html', form=form, os=os, S3_BUCKET=S3_BUCKET, translation=translation)
 
-    return render_template('upload.html', form=form, os=os, S3_BUCKET=None)
+    return render_template('upload.html', form=form, os=os, S3_BUCKET=None, translation=None)
 
 @app.route('/upload_db')
 def upload_db():
