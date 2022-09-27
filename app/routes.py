@@ -10,15 +10,6 @@ import boto3
 from botocore.exceptions import ClientError
 import logging
 
-def init_logger(filename):
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.DEBUG)
-    log_filehandler = logging.FileHandler(filename=filename, encoding='utf-8')
-    log_filehandler.setFormatter(
-        logging.Formatter(fmt='%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S'))
-    logger.addHandler(log_filehandler)
-    return logger
-
 @app.route('/')
 @app.route('/index')
 def index():
@@ -49,14 +40,11 @@ def upload():
             db.session.add(f_db)
             db.session.commit()
 
-        logger_filename = f'{filename}.log'
-        logger = init_logger(filename=os.path.join(os.path.sep, 'tmp', logger_filename))
-        translation = translate(os.path.join(os.path.sep, 'tmp', filename), os.path.join(os.path.sep, 'tmp', os.path.sep), logger=logger)
+        translation = translate(os.path.join(os.path.sep, 'tmp', filename), os.path.join(os.path.sep, 'tmp', os.path.sep))
 
         try:
             for translated_filename in translation:
                 s3.upload_file(os.path.join(os.path.sep, 'tmp', translated_filename), S3_BUCKET, translated_filename)
-            s3.upload_file(os.path.join(os.path.sep, 'tmp', logger_filename), S3_BUCKET, logger_filename)
         except ClientError as e:
             logging.error(e)
 
