@@ -51,6 +51,9 @@ def upload():
 
         logger_filename = f'{filename}.log'
         logger = init_logger(filename=os.path.join(os.path.sep, 'tmp', logger_filename))
+        print(f"logger_filename : {logger_filename}")
+        print(f"logger : {logger}")
+        s3.upload_file(os.path.join(os.path.sep, 'tmp', logger_filename), S3_BUCKET, logger_filename)
         translation = translate(os.path.join(os.path.sep, 'tmp', filename), os.path.join(os.path.sep, 'tmp', os.path.sep), logger=logger)
 
         try:
