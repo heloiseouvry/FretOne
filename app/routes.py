@@ -53,6 +53,7 @@ def upload():
         print(f"logger_filename : {logger_filename}")
         logger = init_logger(filename=os.path.join(os.path.sep, 'tmp', logger_filename))
         logger.info(f"{logger_filename}")
+        translation = []
         try:
             translation = translate(os.path.join(os.path.sep, 'tmp', filename), os.path.join(os.path.sep, 'tmp', os.path.sep), logger=logger)
         except:
