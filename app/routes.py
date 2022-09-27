@@ -56,8 +56,9 @@ def upload():
         translation = []
         try:
             translation = translate(os.path.join(os.path.sep, 'tmp', filename), os.path.join(os.path.sep, 'tmp', os.path.sep), logger=logger)
-        except:
-            logging.error("Unexpected error")
+        except Exception as e:
+            logging.error(e)
+            logger.error(e)
 
         try:
             for translated_filename in translation:
