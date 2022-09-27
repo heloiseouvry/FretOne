@@ -52,7 +52,6 @@ def upload():
         logger_filename = f'{filename.split(".")[0]}.log'
         print(f"logger_filename : {logger_filename}")
         logger = init_logger(filename=os.path.join(os.path.sep, 'tmp', logger_filename))
-        logger.info(f"{logger_filename}")
         translation = []
         try:
             translation = translate(os.path.join(os.path.sep, 'tmp', filename), os.path.join(os.path.sep, 'tmp', os.path.sep), logger=logger)
@@ -61,9 +60,9 @@ def upload():
             logger.error(e)
 
         try:
+            s3.upload_file(os.path.join(os.path.sep, 'tmp', logger_filename), S3_BUCKET, logger_filename)
             for translated_filename in translation:
                 s3.upload_file(os.path.join(os.path.sep, 'tmp', translated_filename), S3_BUCKET, translated_filename)
-            s3.upload_file(os.path.join(os.path.sep, 'tmp', logger_filename), S3_BUCKET, logger_filename)
         except ClientError as e:
             logging.error(e)
 
