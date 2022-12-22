@@ -1,3 +1,16 @@
+# Custom directories/files
+
+JupyterNotebooks/*
+results/*
+data/*
+tab2notes/
+.flaskenv
+config.py
+app/uploads/*
+app/static/translated/*
+app/static/uploads/*
+app.db
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -151,16 +164,3 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 .vscode/settings.json
-
-
-JupyterNotebooks/*
-results/*
-data/*
-tab2notes/
-.flaskenv
-config.py
-app/uploads/*
-app/static/translated/*
-app/static/uploads/*
-
-app.db
