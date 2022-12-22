@@ -1,1 +1,2 @@
 FLASK_APP=foo.py
+FLASK_ENV=development # enable debug mode
